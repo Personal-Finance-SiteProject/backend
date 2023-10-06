@@ -15,7 +15,8 @@ module.exports = {
             usersModel.findOne({
                 attributes: ['id', 'fullName', 'email', 'userName', 'password', 'createdAt', 'avatar', 'updatedAt', 'status'],
                 where: {
-                    userName: username
+                    userName: username,
+                    status: 1
                 },
                 raw: true
             }).then(async result => {

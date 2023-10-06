@@ -16,7 +16,7 @@ function index () {
 
     /** Relations Models **/
     usersModel.belongsTo(usersModel, { foreignKey: 'createdUserId', as: 'userToUser' });
-    usersModel.belongsTo(usersModel, { foreignKey: 'updatedUserId', as: 'userToUserUpdate' });
+    // usersModel.belongsTo(usersModel, { foreignKey: 'updatedUserId', as: 'userToUserUpdate' });
 
     return {
         usersModel,
