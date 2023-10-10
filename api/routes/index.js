@@ -23,7 +23,11 @@ const authRoute = require('./admin-users/auth.route');
 const router = express.Router();
 
 router.use(cors());
+
 router.use('/auth', authRoute);
+
+
+router.use(authMiddleware);
 
 
 // socketService(ioSocket).then(r => {console.log(r) })

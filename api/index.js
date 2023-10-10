@@ -13,4 +13,4 @@ const ioSocket = new ServerSocket(server, {
 })
 
 
-server.listen(service.port, () => console.log(`server started on port ${service.port}`));
+server.listen(service.port, () => console.log(`Server started on port ${service.port}`));
