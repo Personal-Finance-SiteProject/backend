@@ -1,6 +1,6 @@
 const { categoryExpenseLib, savingsLib, usersLib, expensesLib,  } = require('../index')
 
-usersLib.findUserByUserName('demarroquin').then(console.log)
+usersLib.findUserByUserName('dmarroquin').then(console.log)
 // usersLib.createOrUpdateUser({
 //     id: 4,
 //     fullName: 'Daniel Marroquin',
@@ -24,7 +24,7 @@ usersLib.findUserByUserName('demarroquin').then(console.log)
 //     status: 1,
 //     idCreatorUser: 3
 // }).then(console.log)
-categoryExpenseLib.findCategoryExpenseByUser(3).then(console.log)
+// categoryExpenseLib.findCategoryExpenseByUser(3).then(console.log)
 // expensesLib.createOrUpdateExpenseByUser({
 //     id: 11,
 //     spentDate: '2023-09-25 22:53:39',

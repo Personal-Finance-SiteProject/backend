@@ -5,7 +5,7 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const { service: { logs } } = require('../../config');
-// const routes = require('../routes/index');
+const routes = require('../routes/index');
 const error = require('../middlewares/error.middleware');
 
 const app = expressConfig()
@@ -16,7 +16,7 @@ app.use(compress())
 app.use(helmet())
 app.use(cors())
 
-// app.use(routes)
+app.use(routes)
 
 // if error is not an instanceOf Api_errorLib, convert it.
 app.use(error.converter)

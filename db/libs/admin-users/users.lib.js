@@ -11,19 +11,20 @@ module.exports = {
         })
     },
     findUserByUserName: async (username) => {
-        return new Promise ((resolve, reject) => {
-            usersModel.findOne({
+        try {
+            return await usersModel.findOne({
                 attributes: ['id', 'fullName', 'email', 'userName', 'password', 'createdAt', 'avatar', 'updatedAt', 'status'],
                 where: {
                     userName: username,
                     status: 1
                 },
                 raw: true
-            }).then(async result => {
-                resolve(result)
-            }).catch(err => reject(err))
-        })
+            });
+        } catch (err) {
+            throw err;
+        }
     },
+
 
     listUsers: async ({ where, page, pageSize }) => {
         const offset = pageSize * page;

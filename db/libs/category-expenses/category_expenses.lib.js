@@ -2,7 +2,6 @@ const {Op, Sequelize, where} = require('sequelize');
 const days = require('dayjs');
 const models = require('../../models');
 const dayjs = require("dayjs");
-const {result} = require("underscore");
 const { categoryExpensesModel } = models();
 
 module.exports = {
