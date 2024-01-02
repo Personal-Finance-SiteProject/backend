@@ -9,6 +9,25 @@ module.exports = {
             where: { ... where }
         })
     },
+
+    findAll: async (query) => {
+        let where = query.where || {},
+            offset = query.pageSize * query.page,
+            limit = offset + query.pageSize;
+
+        try {
+            return await expensesModel.findAndCountAll({
+                raw: true,
+                where,
+                offset,
+                limit,
+                order: [['createdAt', 'DESC']],
+            });
+        } catch (err) {
+            return null;
+        }
+    },
+
     createOrUpdateExpenseByUser: async (model) => {
         try {
             return new Promise(async (resolve, reject) => {

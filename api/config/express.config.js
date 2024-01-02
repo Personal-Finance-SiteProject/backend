@@ -3,9 +3,10 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const helmet = require('helmet');
-const cors = require('cors');
 const { service: { logs } } = require('../../config');
-const routes = require('../routes/index');
+const routes = require('../routes');
+const cors = require('cors')
+
 const error = require('../middlewares/error.middleware');
 
 const app = expressConfig()

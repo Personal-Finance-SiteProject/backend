@@ -1,6 +1,13 @@
-const { categoryExpenseLib, savingsLib, usersLib, expensesLib,  } = require('../index')
+const {
+    categoryExpenseLib,
+    savingsLib, usersLib,
+    expensesLib,
+} = require('../index')
 
-usersLib.findUserByUserName('dmarroquin').then(console.log)
+expensesLib.findAll({ where: 2, page: 1, pageSize: 10 }).then(console.log)
+
+
+//usersLib.findUserByUserName('dmarroquin').then(console.log)
 // usersLib.createOrUpdateUser({
 //     id: 4,
 //     fullName: 'Daniel Marroquin',
