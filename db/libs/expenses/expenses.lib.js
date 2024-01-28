@@ -1,7 +1,7 @@
 const { Sequelize, where, Op} = require('sequelize');
 const dayjs = require('dayjs');
 const models = require('../../models');
-const { expensesModel } = models();
+const { expensesModel, categoryExpensesModel } = models();
 
 module.exports = {
     findAllExpense: async (where) => {
@@ -10,54 +10,71 @@ module.exports = {
         })
     },
 
-    findAll: async (query) => {
-        let where = query.where || {},
-            offset = query.pageSize * query.page,
-            limit = offset + query.pageSize;
 
+    findAll: async ( userId, page, limit ) => {
+        const offset = (page - 1) * limit
         try {
-            return await expensesModel.findAndCountAll({
-                raw: true,
-                where,
-                offset,
-                limit,
+            const { count, rows } = await expensesModel.findAndCountAll({
+                attributes: [
+                    'spentDate', 'description', 'amount', 'necessarySpent',
+                    'userId', 'categoryId', 'createdAt', 'updatedAt'
+                ],
+                include: [
+                    {
+                        model: categoryExpensesModel, as: 'category', required: true,
+                        attributes: ['name', 'status', 'type']
+                    }
+                ],
+                where: { userId: userId },
                 order: [['createdAt', 'DESC']],
-            });
+                limit,
+                offset,
+
+            })
+            // const totalPages = Math.ceil(count/limit);
+
+            return {
+                count: count,
+                // itemsPerPage: limit,
+                // totalPages,
+                // currentPage: page,
+                rows: rows
+            }
+
         } catch (err) {
-            return null;
+            console.error('Ha ocurrido un error al recuperar los usuarios', err);
         }
     },
 
+
     createOrUpdateExpenseByUser: async (model) => {
         try {
-            return new Promise(async (resolve, reject) => {
-                const expenseModel = model.id ? await expensesModel.findByPk(model.id) : null;
-                if (expenseModel) {
-                    model.updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
-                    expenseModel.update(model)
-                        .then(() => resolve({ ...expenseModel, ...model }))
-                        .catch((err) => {
-                            if (err instanceof Sequelize.UniqueConstraintError) {
-                                err.message = 'Id must be unique update';
-                            }
-                            reject(err);
-                        });
-                } else {
-                    model.createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
-                    expensesModel.create(model)
-                        .then((result) => resolve(result))
-                        .catch((err) => {
-                            if (err instanceof Sequelize.UniqueConstraintError) {
-                                err.message = 'Id must be unique create';
-                            }
-                            reject(err);
-                        });
+            const expenseModel = model.id ? await expensesModel.findByPk(model.id) : null;
+            if (expenseModel) {
+                model.updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+                try {
+                    await expenseModel.update(model);
+                    return { ...expenseModel, ...model };
+                } catch (err) {
+                    if (err instanceof Sequelize.UniqueConstraintError) {
+                        err.message = 'Id must be unique update';
+                    }
                 }
-            });
+            } else {
+                model.createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+                try {
+                    return await expensesModel.create(model);
+                } catch (err) {
+                    if (err instanceof Sequelize.UniqueConstraintError) {
+                        err.message = 'Id must be unique create';
+                    }
+                }
+            }
         } catch (error) {
             throw error;
         }
     },
+
 
     findExpensesByIdUser: async (userId) => {
         try {

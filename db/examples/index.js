@@ -4,7 +4,8 @@ const {
     expensesLib,
 } = require('../index')
 
-expensesLib.findAll({ where: 2, page: 1, pageSize: 10 }).then(console.log)
+// expensesLib.findAll({ where: { userId: 3 }, page: 1, pageSize: 10 }).then(console.log);
+expensesLib.findAll( 3, 1,5 ).then(console.log);
 
 
 //usersLib.findUserByUserName('dmarroquin').then(console.log)

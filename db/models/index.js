@@ -16,6 +16,10 @@ function index () {
 
     /** Relations Models **/
     usersModel.belongsTo(usersModel, { foreignKey: 'createdUserId', as: 'userToUser' });
+    expensesModel.belongsTo(categoryExpensesModel, {
+        foreignKey: 'categoryId',
+        as: 'category',
+    });
     // usersModel.belongsTo(usersModel, { foreignKey: 'updatedUserId', as: 'userToUserUpdate' });
 
     return {

@@ -37,6 +37,12 @@ module.exports = function(sequelize, DataTypes) {
         categoryId: {
             type: DataTypes.INTEGER(11),
             allowNull: true,
+            references: {
+                model: {
+                    tableName:'category_expense'
+                },
+                key: 'id'
+            },
             field: 'category_id'
         },
         createdAt: {
