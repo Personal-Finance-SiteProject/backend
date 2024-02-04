@@ -17,7 +17,7 @@ api.route('/find-all-expense').get(async (req, res, next) => {
     }
 
     try {
-        expenseList = await expensesLib.findAll(user_id, numPage, numLimit)
+        expenseList = await expensesLib.findAllExpenseByUser(user_id, numPage, numLimit)
         res.status(200).json(expenseList);
     } catch (err) {
         return next(err)

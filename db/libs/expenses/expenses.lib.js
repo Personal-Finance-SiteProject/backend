@@ -11,7 +11,7 @@ module.exports = {
     },
 
 
-    findAll: async ( userId, page, limit ) => {
+    findAllExpenseByUser: async ( userId, page, limit ) => {
         const offset = (page - 1) * limit
         try {
             const { count, rows } = await expensesModel.findAndCountAll({
@@ -76,7 +76,7 @@ module.exports = {
     },
 
 
-    findExpensesByIdUser: async (userId) => {
+    findExpenseByIdUser: async (userId) => {
         try {
             const expenses = await expensesModel.findAll({
                 where: {
