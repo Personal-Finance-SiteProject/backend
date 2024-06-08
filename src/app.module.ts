@@ -6,6 +6,7 @@ import { CategoryExpensesModule } from "./app/category-expenses/category-expense
 import { ExpensesModule } from "./app/expenses/expenses.module";
 import { SavingGoalModule } from "./app/saving-goal/saving-goal.module";
 import { AuthModule } from "./app/auth/auth.module";
+import { AnalyticsModule } from "./app/analytics/analytics.module";
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from "./app/auth/auth.module";
         CategoryExpensesModule,
         ExpensesModule,
         SavingGoalModule,
+        AnalyticsModule
     ],
 })
 export class AppModule {}

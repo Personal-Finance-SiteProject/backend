@@ -12,7 +12,7 @@ const ormConfig: TypeOrmModuleOptions = {
     database: process.env.DB_MAIN_DATABASE,
     synchronize: true,
     autoLoadEntities: true,
-    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+    entities: [__dirname + '/../**/*.entities{.ts,.js}'],
     logging: true,
 };
 

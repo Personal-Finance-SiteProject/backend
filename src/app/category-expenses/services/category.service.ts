@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CategoryExpenseEntity } from '../common/entities/category.entity';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CategoryExpenseDto } from "../dto/category-expense.dto";
@@ -62,28 +62,19 @@ export class CategoryService {
         }
     }
 
-    // async deleteCategoryExpense(model: { id: number }): Promise<CategoryExpenseEntity[]> {
-    //     try {
-    //         const result = await this.categoryExpensesRepository.update(
-    //             {
-    //                 updatedAt: dayjs().format('YYYY-MM-DD hh:mm:ss'),  // Uso de dayjs
-    //                 status: 0,
-    //             },
-    //             {
-    //                 where: {
-    //                     id: model.id,
-    //                 },
-    //                 raw: true,
-    //             },
-    //         );
-    //
-    //         return result ? result : null;
-    //     } catch (err) {
-    //         throw err;
-    //     }
-    // }
-
-
+    async deleteCategoryExpense(model: { id: number }): Promise<any> {
+        try {
+            return await this.categoryExpensesRepository.update(
+                model.id,
+                {
+                    updatedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                    status: 0,
+                },
+            );
+        } catch (err) {
+            throw err;
+        }
+    }
 
 
 }
