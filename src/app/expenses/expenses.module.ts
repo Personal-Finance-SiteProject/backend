@@ -3,6 +3,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ExpensesEntity } from "./common/entities/expenses.entity";
 import { ExpensesController } from './controllers/expenses.controller'
 import ormConfig from "../../config/ormconfig";
+import { ExpensesService } from "./services/expenses.service";
 
 @Module({
     imports: [
@@ -10,6 +11,7 @@ import ormConfig from "../../config/ormconfig";
         TypeOrmModule.forRoot(ormConfig),
     ],
     controllers: [ExpensesController],
+    providers: [ExpensesService]
 
 })
 export class ExpensesModule {}

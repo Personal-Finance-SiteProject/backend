@@ -1,7 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Category')
+@ApiBearerAuth()
 @Controller('category')
 export class CategoryController {
     constructor() {}
