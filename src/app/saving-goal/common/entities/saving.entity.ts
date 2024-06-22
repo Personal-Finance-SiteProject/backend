@@ -33,6 +33,9 @@ export class SavingGoalEntity {
     @Column({ type: 'timestamp', nullable: true, default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
 
+    @Column({ type: 'timestamp', nullable: true, default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
+    updatedAt: Date;
+
     @Column({ type: 'int', nullable: false, default: 1, name: 'status' })
     status: number;
 

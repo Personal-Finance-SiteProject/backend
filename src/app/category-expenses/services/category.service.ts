@@ -15,7 +15,7 @@ export class CategoryService {
     }
 
 
-    async createOrUpdateCategoryExpense(model: CategoryExpenseDto, userId: CategoryExpenseDto): Promise<CategoryExpenseEntity> {
+    async createOrUpdateCategoryExpense(model: CategoryExpenseDto, userId: number): Promise<CategoryExpenseEntity> {
         try {
             let categoryExpense: CategoryExpenseEntity;
 
@@ -33,7 +33,7 @@ export class CategoryService {
             if (!categoryExpense) {
                 categoryExpense = this.categoryExpensesRepository.create({
                     ...model,
-                    creatorUser: userId,
+                    idCreatorUser: userId,
                     createdAt: new Date(),
                 });
                 await this.categoryExpensesRepository.save(categoryExpense);
@@ -48,6 +48,7 @@ export class CategoryService {
             throw error;
         }
     }
+
 
     async findCategoryExpenseByUser(idUser: number): Promise<CategoryExpenseEntity[]> {
         try {

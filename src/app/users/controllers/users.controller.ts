@@ -7,7 +7,9 @@ import { CreateOrUpdateUserDto } from "../dto/user.dto";
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+      private readonly usersService: UsersService
+  ) {}
 
 
   @Post('create-or-update-user')

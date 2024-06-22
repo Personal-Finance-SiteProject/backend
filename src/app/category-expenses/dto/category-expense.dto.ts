@@ -11,4 +11,8 @@ export class CategoryExpenseDto {
     @IsNotEmpty()
     @IsString()
     type: string;
+
+    @IsNotEmpty()
+    @IsString()
+    idCreatorUser?: number;
 }
